@@ -160,13 +160,14 @@ If `git push` asks for a password, GitHub **does not use your account password**
 
 **Easier option — GitHub Desktop:** [Download GitHub Desktop](https://desktop.github.com/) → **File → Add Local Repository** → choose `Desktop/HYGLOWTECH` → **Publish repository** and pick `Nishant8405006745/Hyglowtech`.
 
-**SSH (if you use SSH keys with GitHub):**
+**SSH (no HTTPS password):** Add your public key at [GitHub → SSH keys](https://github.com/settings/keys). This repo can use a **dedicated key** so your other GitHub repos keep using their usual key:
 
-```bash
-cd ~/Desktop/HYGLOWTECH
-git remote set-url origin git@github.com:Nishant8405006745/Hyglowtech.git
-git push -u origin main
-```
+1. One-time setup (already done if you used the Cursor-generated key): `~/.ssh/hyglowtech_github_push` + `Host github.com-hyglow` in `~/.ssh/config`.
+2. Show the public key: `cat ~/.ssh/hyglowtech_github_push.pub` — paste **all one line** into GitHub → **New SSH key**.
+3. Remote should use the alias: `git@github.com-hyglow:Nishant8405006745/Hyglowtech.git`  
+   Then: `cd ~/Desktop/HYGLOWTECH && git push -u origin main`
+
+Or use the default host: `git remote set-url origin git@github.com:Nishant8405006745/Hyglowtech.git` if your main `~/.ssh` key is already registered with GitHub.
 
 **Do not commit secrets:** `backend/.env`, `frontend/.env.local`, and `.pgdata/` stay gitignored. Configure production env vars on GitHub/Vercel/hosting only.
 
