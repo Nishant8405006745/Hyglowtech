@@ -6,6 +6,9 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
+# Homebrew `gh` is often outside non-interactive PATHs.
+export PATH="/opt/homebrew/bin:/usr/local/bin:${PATH}"
+
 REMOTE_PATH="Nishant8405006745/Hyglowtech.git"
 AUTH_URL="https://github.com/${REMOTE_PATH}"
 
@@ -59,10 +62,24 @@ APPLESCRIPT
   printf '%s' "$out"
 }
 
+echo "Pushing main → ${AUTH_URL} …"
+
+# Prefer GitHub CLI when already logged in (no PAT in env required).
+if command -v gh >/dev/null 2>&1 && gh auth status -h github.com >/dev/null 2>&1; then
+  echo "Using GitHub CLI (gh) credentials…"
+  gh auth setup-git
+  if git push -u origin main; then
+    git branch --set-upstream-to=origin/main main 2>/dev/null || true
+    echo "Done. Verify: https://github.com/${REMOTE_PATH%.git}"
+    exit 0
+  fi
+  echo "git push failed." >&2
+  exit 1
+fi
+
 TOKEN="$(get_token)"
 PUSH_URL="https://x-access-token:${TOKEN}@github.com/${REMOTE_PATH}"
 
-echo "Pushing main → ${AUTH_URL} …"
 if ! git push "$PUSH_URL" HEAD:main; then
   echo "" >&2
   echo "Push failed. If you saw HTTP 403, the token can log in but cannot write to this repo:" >&2
