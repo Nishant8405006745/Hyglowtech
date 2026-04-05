@@ -3,14 +3,27 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #060a12;
+  --foreground: #f1f5f9;
+  --glow-amber: rgba(251, 191, 36, 0.45);
+  --glow-cyan: rgba(56, 189, 248, 0.2);
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #f8fafc;
+    --foreground: #0f172a;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 }
 
@@ -23,36 +36,48 @@
   }
 }
 
-@keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .animate-fade-in {
-  animation: fade-in 0.6s ease-out both;
-}
-
-.animate-fade-up {
-  animation: fade-up 0.55s ease-out 0.08s both;
+  animation: fade-in 0.55s ease-out both;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-fade-in,
-  .animate-fade-up {
+  .animate-fade-in {
     animation: none;
     opacity: 1;
-    transform: none;
   }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .transition-smooth {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow,
+      transform, filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 250ms;
+  }
+}
+
+/* Marketing page mesh gradient (performance-friendly) */
+.bg-mesh-lights {
+  background-color: #060a12;
+  background-image:
+    radial-gradient(at 0% 0%, rgba(251, 191, 36, 0.12) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(56, 189, 248, 0.1) 0px, transparent 45%),
+    radial-gradient(at 100% 100%, rgba(251, 191, 36, 0.08) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(34, 211, 238, 0.06) 0px, transparent 45%);
+}
+
+.card-lift {
+  @apply transition-all duration-300 ease-out;
+}
+.card-lift:hover {
+  @apply -translate-y-1 shadow-xl shadow-amber-500/10 ring-1 ring-amber-400/20;
 }

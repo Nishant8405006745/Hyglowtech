@@ -7,61 +7,78 @@ import { MarketingFooter } from "@/components/MarketingFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 
 export const metadata: Metadata = {
-  title: "Features | Hyglow",
-  description: "JWT authentication, Neon PostgreSQL, RBAC, admin panel, and employee hierarchy.",
+  title: "Products & services",
+  description:
+    "LED, smart, halogen, fluorescent, tube, specialty, and commercial electrical lighting from Hyglow — specs, trade accounts, and reliable supply.",
 };
 
 const site = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
-export default function FeaturesPage() {
-  const items = [
-    {
-      title: "Secure auth",
-      body: "Bcrypt password hashing, JWT access tokens, and HTTP-only cookies via a Next.js BFF.",
-    },
-    {
-      title: "Role-based access",
-      body: "Super Admin, Admin, Manager, and User roles enforced in FastAPI and reflected in the dashboard.",
-    },
-    {
-      title: "Neon + SQLAlchemy",
-      body: "Serverless PostgreSQL with Alembic migrations and a clean ORM layer.",
-    },
-    {
-      title: "Operational UI",
-      body: "Tailwind-powered marketing pages and an admin workspace for users and employees.",
-    },
-  ];
+const items = [
+  {
+    title: "Full bulb & lamp range",
+    body: "E27, E14, B22, GU10, MR16, G9, linear tubes, PL-C, capsules, and more — one catalogue covering residential through industrial.",
+  },
+  {
+    title: "Energy & compliance",
+    body: "High-efficiency LED lines, clear EU energy labels where applicable, and product data for building regulations and ESOS reporting.",
+  },
+  {
+    title: "Smart lighting",
+    body: "App and hub-based lamps, tunable white, RGB scenes, and integration-friendly options for modern installs.",
+  },
+  {
+    title: "Trade & team accounts",
+    body: "Role-based access for buyers, site managers, and administrators — manage who can place orders and view project pricing.",
+  },
+  {
+    title: "Technical clarity",
+    body: "Lumens, kelvin, CRI, beam angles, and dimmer compatibility spelled out so you order once and fit with confidence.",
+  },
+  {
+    title: "Commercial & emergency",
+    body: "Bulkheads, high-bay, flood, non-maintained and maintained emergency gear — specified for warehouses, car parks, and public buildings.",
+  },
+];
 
+export default function FeaturesPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-950">
+    <div className="min-h-screen bg-mesh-lights">
       <SoftwareApplicationJsonLd
         type="SoftwareApplication"
-        name="Hyglow"
-        description="SaaS starter with Next.js, FastAPI, and Neon."
+        name="Hyglow Lighting"
+        description="Electrical bulbs and lighting — LED, smart, halogen, fluorescent, commercial."
         applicationCategory="BusinessApplication"
         operatingSystem="Any"
         url={site}
         offers={{ price: 0, priceCurrency: "USD" }}
       />
       <SiteHeader />
-      <main className="mx-auto max-w-6xl px-4 py-16">
-        <h1 className="text-3xl font-bold text-zinc-900 dark:text-white">Features</h1>
-        <p className="mt-2 max-w-2xl text-zinc-600 dark:text-zinc-400">
-          Everything in this repo is structured for production deployment: environment-based config, modular routers, and
-          explicit permission checks.
+      <main className="mx-auto max-w-6xl px-4 py-16 sm:py-20">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-400/90">Catalogue & platform</p>
+        <h1 className="font-display mt-3 text-4xl font-semibold tracking-tight text-white sm:text-5xl">What we offer</h1>
+        <p className="mt-4 max-w-2xl text-lg text-slate-400">
+          Hyglow is built around <strong className="font-medium text-slate-200">electrical light sources</strong> — not
+          furniture, not wiring — so our range and tools stay focused on bulbs, tubes, and lamps that actually ship to site.
         </p>
-        <ul className="mt-12 grid gap-8 sm:grid-cols-2">
+        <ul className="mt-14 grid gap-6 sm:grid-cols-2">
           {items.map((f) => (
-            <li key={f.title} className="rounded-2xl border border-zinc-200 p-6 dark:border-zinc-800">
-              <h2 className="text-lg font-semibold text-zinc-900 dark:text-white">{f.title}</h2>
-              <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">{f.body}</p>
+            <li
+              key={f.title}
+              className="rounded-2xl border border-white/10 bg-night-900/50 p-7 transition-all duration-300 hover:border-amber-400/25 hover:bg-night-900/80"
+            >
+              <h2 className="font-display text-xl font-semibold text-white">{f.title}</h2>
+              <p className="mt-3 text-sm leading-relaxed text-slate-400">{f.body}</p>
             </li>
           ))}
         </ul>
-        <p className="mt-12">
-          <Link href="/pricing" className="font-medium text-violet-600 hover:text-violet-500 dark:text-violet-400">
-            View pricing →
+        <p className="mt-14">
+          <Link
+            href="/pricing"
+            className="inline-flex items-center gap-2 font-semibold text-amber-400 transition-colors hover:text-amber-300"
+          >
+            See pricing
+            <span aria-hidden>→</span>
           </Link>
         </p>
       </main>

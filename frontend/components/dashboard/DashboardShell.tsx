@@ -37,14 +37,14 @@ export function DashboardShell() {
 
   if (err && !me) {
     return (
-      <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-red-800 dark:border-red-900 dark:bg-red-950/40 dark:text-red-200">
+      <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-6 text-red-200">
         {err}
       </div>
     );
   }
 
   if (!me) {
-    return <p className="text-zinc-500">Loading your workspace…</p>;
+    return <p className="text-slate-500">Loading your workspace…</p>;
   }
 
   const isAdmin = me.role === ROLE_SUPER_ADMIN || me.role === ROLE_ADMIN;
@@ -53,11 +53,11 @@ export function DashboardShell() {
 
   return (
     <div className="space-y-10">
-      <header className="flex flex-col gap-4 border-b border-zinc-200 pb-6 dark:border-zinc-800 sm:flex-row sm:items-center sm:justify-between">
+      <header className="flex flex-col gap-4 border-b border-white/10 pb-6 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-zinc-900 dark:text-white">Dashboard</h1>
-          <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-            Signed in as <span className="font-medium text-zinc-800 dark:text-zinc-200">{me.email}</span>
+          <h1 className="font-display text-2xl font-semibold text-white">Dashboard</h1>
+          <p className="mt-1 text-sm text-slate-400">
+            Signed in as <span className="font-medium text-amber-100/90">{me.email}</span>
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
@@ -65,7 +65,7 @@ export function DashboardShell() {
           <button
             type="button"
             onClick={() => void logout()}
-            className="rounded-lg border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
+            className="rounded-lg border border-white/15 px-4 py-2 text-sm font-medium text-slate-200 transition-colors hover:bg-white/10"
           >
             Log out
           </button>
@@ -81,7 +81,7 @@ export function DashboardShell() {
 
 function RoleBadge({ role }: { role: string }) {
   return (
-    <span className="rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-violet-800 dark:bg-violet-950 dark:text-violet-200">
+    <span className="rounded-full border border-amber-400/35 bg-amber-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-amber-200">
       {role}
     </span>
   );
@@ -89,11 +89,11 @@ function RoleBadge({ role }: { role: string }) {
 
 function UserWelcome({ me }: { me: Me }) {
   return (
-    <section className="rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-      <h2 className="text-lg font-medium text-zinc-900 dark:text-white">Your workspace</h2>
-      <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-        Hello, {me.name}. You have the <strong className="text-zinc-800 dark:text-zinc-200">User</strong> role. Contact an
-        administrator if you need elevated access or employee assignments.
+    <section className="rounded-2xl border border-white/10 bg-night-900/60 p-8 shadow-lg shadow-black/20 backdrop-blur-sm">
+      <h2 className="text-lg font-medium text-white">Your workspace</h2>
+      <p className="mt-2 text-sm text-slate-400">
+        Hello, {me.name}. You have the <strong className="text-amber-100/90">User</strong> role. Contact an administrator
+        if you need trade pricing, elevated access, or team assignments.
       </p>
     </section>
   );
@@ -181,21 +181,21 @@ function UsersAdminPanel() {
 
   return (
     <section>
-      <h2 className="text-lg font-semibold text-zinc-900 dark:text-white">Users</h2>
-      <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">Super Admin and Admin can view and manage all accounts.</p>
+      <h2 className="text-lg font-semibold text-white">Users</h2>
+      <p className="mt-1 text-sm text-slate-400">Super Admin and Admin can view and manage all accounts.</p>
       {error ? <p className="mt-2 text-sm text-red-600">{error}</p> : null}
 
       <form
         onSubmit={(e) => void createUser(e)}
-        className="mt-6 grid gap-4 rounded-2xl border border-zinc-200 bg-zinc-50 p-6 dark:border-zinc-800 dark:bg-zinc-900/50 sm:grid-cols-2"
+        className="mt-6 grid gap-4 rounded-2xl border border-white/10 bg-night-900/50 p-6 sm:grid-cols-2"
       >
-        <h3 className="sm:col-span-2 text-sm font-medium text-zinc-800 dark:text-zinc-200">Invite user</h3>
+        <h3 className="sm:col-span-2 text-sm font-medium text-slate-200">Invite user</h3>
         <input
           required
           placeholder="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-600 dark:bg-zinc-950"
+          className="rounded-lg border border-white/15 bg-night-950/60 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-amber-400/60 focus:outline-none focus:ring-1 focus:ring-amber-400/30"
         />
         <input
           required
@@ -203,7 +203,7 @@ function UsersAdminPanel() {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-600 dark:bg-zinc-950"
+          className="rounded-lg border border-white/15 bg-night-950/60 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-amber-400/60 focus:outline-none focus:ring-1 focus:ring-amber-400/30"
         />
         <input
           required
@@ -211,12 +211,12 @@ function UsersAdminPanel() {
           placeholder="Temporary password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-600 dark:bg-zinc-950"
+          className="rounded-lg border border-white/15 bg-night-950/60 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-amber-400/60 focus:outline-none focus:ring-1 focus:ring-amber-400/30"
         />
         <select
           value={roleName}
           onChange={(e) => setRoleName(e.target.value)}
-          className="rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-600 dark:bg-zinc-950"
+          className="rounded-lg border border-white/15 bg-night-950/60 px-3 py-2 text-sm text-slate-100 focus:border-amber-400/60 focus:outline-none focus:ring-1 focus:ring-amber-400/30"
         >
           {roles.map((r) => (
             <option key={r.id} value={r.role_name}>
@@ -226,32 +226,32 @@ function UsersAdminPanel() {
         </select>
         <button
           type="submit"
-          className="sm:col-span-2 rounded-lg bg-violet-600 py-2 text-sm font-medium text-white hover:bg-violet-500"
+          className="sm:col-span-2 rounded-lg bg-gradient-to-r from-amber-500 to-amber-400 py-2 text-sm font-semibold text-night-950 shadow-md shadow-amber-500/20 transition-all hover:brightness-105"
         >
           Create user
         </button>
       </form>
 
-      <div className="mt-6 overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
-        <table className="min-w-full text-left text-sm">
-          <thead className="bg-zinc-100 dark:bg-zinc-800/80">
+      <div className="mt-6 overflow-x-auto rounded-xl border border-white/10">
+        <table className="min-w-full text-left text-sm text-slate-300">
+          <thead className="bg-white/5">
             <tr>
-              <th className="px-4 py-2 font-medium">Name</th>
-              <th className="px-4 py-2 font-medium">Email</th>
-              <th className="px-4 py-2 font-medium">Role</th>
-              <th className="px-4 py-2 font-medium">Actions</th>
+              <th className="px-4 py-2 font-medium text-slate-200">Name</th>
+              <th className="px-4 py-2 font-medium text-slate-200">Email</th>
+              <th className="px-4 py-2 font-medium text-slate-200">Role</th>
+              <th className="px-4 py-2 font-medium text-slate-200">Actions</th>
             </tr>
           </thead>
           <tbody>
             {users.map((u) => (
-              <tr key={u.id} className="border-t border-zinc-200 dark:border-zinc-800">
+              <tr key={u.id} className="border-t border-white/10">
                 <td className="px-4 py-2">{u.name}</td>
                 <td className="px-4 py-2">{u.email}</td>
                 <td className="px-4 py-2">
                   <select
                     value={u.role}
                     onChange={(e) => void updateRole(u.id, e.target.value)}
-                    className="rounded border border-zinc-300 bg-white px-2 py-1 text-xs dark:border-zinc-600 dark:bg-zinc-950"
+                    className="rounded border border-white/15 bg-night-950/80 px-2 py-1 text-xs text-slate-100"
                   >
                     {roles.map((r) => (
                       <option key={r.id} value={r.role_name}>
@@ -342,29 +342,29 @@ function EmployeesAdminPanel() {
 
   return (
     <section>
-      <h2 className="text-lg font-semibold text-zinc-900 dark:text-white">Employees</h2>
-      <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">Assign managers by linking a User id (managers see their team).</p>
+      <h2 className="text-lg font-semibold text-white">Employees</h2>
+      <p className="mt-1 text-sm text-slate-400">Assign managers by linking a User id (managers see their team).</p>
       {error ? <p className="mt-2 text-sm text-red-600">{error}</p> : null}
 
       <form
         onSubmit={(e) => void createEmp(e)}
-        className="mt-6 flex flex-wrap items-end gap-4 rounded-2xl border border-zinc-200 bg-zinc-50 p-6 dark:border-zinc-800 dark:bg-zinc-900/50"
+        className="mt-6 flex flex-wrap items-end gap-4 rounded-2xl border border-white/10 bg-night-900/50 p-6"
       >
-        <label className="flex flex-col text-xs font-medium text-zinc-600 dark:text-zinc-400">
+        <label className="flex flex-col text-xs font-medium text-slate-400">
           Name
           <input
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="mt-1 w-48 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-600 dark:bg-zinc-950"
+            className="mt-1 w-48 rounded-lg border border-white/15 bg-night-950/60 px-3 py-2 text-sm text-slate-100 focus:border-amber-400/60 focus:outline-none focus:ring-1 focus:ring-amber-400/30"
           />
         </label>
-        <label className="flex flex-col text-xs font-medium text-zinc-600 dark:text-zinc-400">
+        <label className="flex flex-col text-xs font-medium text-slate-400">
           Manager (optional)
           <select
             value={managerId}
             onChange={(e) => setManagerId(e.target.value)}
-            className="mt-1 w-56 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-600 dark:bg-zinc-950"
+            className="mt-1 w-56 rounded-lg border border-white/15 bg-night-950/60 px-3 py-2 text-sm text-slate-100 focus:border-amber-400/60 focus:outline-none focus:ring-1 focus:ring-amber-400/30"
           >
             <option value="">— None —</option>
             {managers.map((m) => (
@@ -374,18 +374,21 @@ function EmployeesAdminPanel() {
             ))}
           </select>
         </label>
-        <button type="submit" className="rounded-lg bg-violet-600 px-4 py-2 text-sm font-medium text-white hover:bg-violet-500">
+        <button
+          type="submit"
+          className="rounded-lg bg-gradient-to-r from-amber-500 to-amber-400 px-4 py-2 text-sm font-semibold text-night-950 shadow-md shadow-amber-500/20 hover:brightness-105"
+        >
           Add employee
         </button>
       </form>
 
-      <div className="mt-6 overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
-        <table className="min-w-full text-left text-sm">
-          <thead className="bg-zinc-100 dark:bg-zinc-800/80">
+      <div className="mt-6 overflow-x-auto rounded-xl border border-white/10">
+        <table className="min-w-full text-left text-sm text-slate-300">
+          <thead className="bg-white/5">
             <tr>
-              <th className="px-4 py-2 font-medium">Name</th>
-              <th className="px-4 py-2 font-medium">Manager user id</th>
-              <th className="px-4 py-2 font-medium">Actions</th>
+              <th className="px-4 py-2 font-medium text-slate-200">Name</th>
+              <th className="px-4 py-2 font-medium text-slate-200">Manager user id</th>
+              <th className="px-4 py-2 font-medium text-slate-200">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -420,19 +423,19 @@ function EmployeeRowEditor({
   const [localMgr, setLocalMgr] = useState(row.manager_id === null ? "" : String(row.manager_id));
 
   return (
-    <tr className="border-t border-zinc-200 dark:border-zinc-800">
+    <tr className="border-t border-white/10">
       <td className="px-4 py-2">
         <input
           value={localName}
           onChange={(e) => setLocalName(e.target.value)}
-          className="w-full min-w-[8rem] rounded border border-zinc-300 bg-white px-2 py-1 text-sm dark:border-zinc-600 dark:bg-zinc-950"
+          className="w-full min-w-[8rem] rounded border border-white/15 bg-night-950/60 px-2 py-1 text-sm text-slate-100"
         />
       </td>
       <td className="px-4 py-2">
         <select
           value={localMgr}
           onChange={(e) => setLocalMgr(e.target.value)}
-          className="rounded border border-zinc-300 bg-white px-2 py-1 text-sm dark:border-zinc-600 dark:bg-zinc-950"
+          className="rounded border border-white/15 bg-night-950/60 px-2 py-1 text-sm text-slate-100"
         >
           <option value="">— None —</option>
           {managers.map((m) => (
@@ -451,7 +454,7 @@ function EmployeeRowEditor({
               manager_id: localMgr === "" ? null : Number(localMgr),
             })
           }
-          className="text-xs font-medium text-violet-600 hover:underline"
+          className="text-xs font-medium text-amber-400 hover:text-amber-300 hover:underline"
         >
           Save
         </button>
@@ -523,8 +526,8 @@ function ManagerEmployeesSection() {
 
   return (
     <section>
-      <h2 className="text-lg font-semibold text-zinc-900 dark:text-white">Your team</h2>
-      <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">Employees assigned to you as manager.</p>
+      <h2 className="text-lg font-semibold text-white">Your team</h2>
+      <p className="mt-1 text-sm text-slate-400">Employees assigned to you as manager.</p>
       {error ? <p className="mt-2 text-sm text-red-600">{error}</p> : null}
 
       <form onSubmit={(e) => void add(e)} className="mt-6 flex flex-wrap gap-4">
@@ -533,16 +536,19 @@ function ManagerEmployeesSection() {
           placeholder="Employee name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-600 dark:bg-zinc-950"
+          className="rounded-lg border border-white/15 bg-night-950/60 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500"
         />
-        <button type="submit" className="rounded-lg bg-violet-600 px-4 py-2 text-sm font-medium text-white hover:bg-violet-500">
+        <button
+          type="submit"
+          className="rounded-lg bg-gradient-to-r from-amber-500 to-amber-400 px-4 py-2 text-sm font-semibold text-night-950 shadow-md shadow-amber-500/20 hover:brightness-105"
+        >
           Add direct report
         </button>
       </form>
 
-      <ul className="mt-6 divide-y divide-zinc-200 rounded-xl border border-zinc-200 dark:divide-zinc-800 dark:border-zinc-800">
+      <ul className="mt-6 divide-y divide-white/10 rounded-xl border border-white/10">
         {rows.length === 0 ? (
-          <li className="px-4 py-6 text-sm text-zinc-500">No employees assigned yet.</li>
+          <li className="px-4 py-6 text-sm text-slate-500">No employees assigned yet.</li>
         ) : (
           rows.map((r) => (
             <ManagerEmployeeLine key={r.id} row={r} onSave={(n) => void saveRow(r.id, n)} onDelete={() => void del(r.id)} />
@@ -568,10 +574,10 @@ function ManagerEmployeeLine({
       <input
         value={n}
         onChange={(e) => setN(e.target.value)}
-        className="flex-1 rounded border border-zinc-300 bg-white px-2 py-1 text-sm dark:border-zinc-600 dark:bg-zinc-950"
+        className="flex-1 rounded border border-white/15 bg-night-950/60 px-2 py-1 text-sm text-slate-100"
       />
       <div className="flex gap-2">
-        <button type="button" onClick={() => onSave(n)} className="text-sm font-medium text-violet-600 hover:underline">
+        <button type="button" onClick={() => onSave(n)} className="text-sm font-medium text-amber-400 hover:text-amber-300 hover:underline">
           Save
         </button>
         <button type="button" onClick={onDelete} className="text-sm font-medium text-red-600 hover:underline dark:text-red-400">

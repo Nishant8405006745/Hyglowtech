@@ -9,10 +9,10 @@ export function JsonLdOrg() {
   return (
     <OrganizationJsonLd
       type="Organization"
-      name="Hyglow"
+      name="Hyglow Lighting"
       url={site}
-      logo={`${site}/favicon.ico`}
-      description="Hyglow — team operations SaaS starter with roles, users, and employees."
+      logo={`${site}/hyglow-logo.png`}
+      description="Electrical bulbs and lighting supplier — LED, smart, halogen, fluorescent, tube, specialty, and commercial lamps for homes and trade."
     />
   );
 }

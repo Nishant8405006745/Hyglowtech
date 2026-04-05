@@ -50,8 +50,8 @@ function ResetInner() {
   if (!token) {
     return (
       <AuthCard>
-        <p className="text-sm text-zinc-600 dark:text-zinc-400">This page needs a valid reset link. Open the URL from your reset email or server log.</p>
-        <Link href="/forgot-password" className="mt-4 inline-block text-sm font-medium text-violet-600 dark:text-violet-400">
+        <p className="text-sm text-slate-400">This page needs a valid reset link. Open the URL from your reset email or server log.</p>
+        <Link href="/forgot-password" className="mt-4 inline-block text-sm font-medium text-amber-400 hover:text-amber-300">
           Request a new link
         </Link>
       </AuthCard>
@@ -78,12 +78,12 @@ function ResetInner() {
           autoComplete="new-password"
         />
         {error ? (
-          <p className="rounded-xl bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-950/40 dark:text-red-300">{error}</p>
+          <p className="rounded-xl border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-200">{error}</p>
         ) : null}
         <button
           type="submit"
           disabled={loading}
-          className="rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-600 py-3 text-sm font-semibold text-white shadow-lg shadow-violet-500/25 transition-all duration-300 hover:scale-[1.01] disabled:pointer-events-none disabled:opacity-60"
+          className="rounded-xl bg-gradient-to-r from-amber-500 to-amber-400 py-3 text-sm font-semibold text-night-950 shadow-lg shadow-amber-500/25 transition-all duration-300 ease-out-expo hover:scale-[1.01] disabled:pointer-events-none disabled:opacity-60"
         >
           {loading ? "Updating…" : "Update password"}
         </button>

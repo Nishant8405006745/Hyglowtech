@@ -5,26 +5,31 @@ import Link from "next/link";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 
 export const metadata: Metadata = {
-  title: "Dashboard | Hyglow",
+  title: "Dashboard",
   robots: { index: false, follow: false },
+  description: "Hyglow Lighting — workspace for orders, team, and bulb catalogue access.",
 };
 
 export default function DashboardPage() {
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
-      <header className="border-b border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
+    <div className="min-h-screen bg-mesh-lights">
+      <header className="sticky top-0 z-40 border-b border-white/10 bg-night-950/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
           <Link
             href="/"
-            className="flex items-center gap-2 text-lg font-semibold text-violet-600 transition-opacity hover:opacity-90 dark:text-violet-400"
+            className="group flex items-center gap-2 text-lg font-semibold text-white transition-opacity hover:opacity-90"
           >
-            <span className="relative h-9 w-9 overflow-hidden rounded-lg ring-1 ring-violet-200/60 dark:ring-violet-800/60">
-              <Image src="/hyglow-logo.png" alt="Hyglow" width={72} height={72} className="h-full w-full object-contain" />
+            <span className="relative h-9 w-9 overflow-hidden rounded-lg bg-gradient-to-br from-amber-400/30 to-cyan-400/20 p-0.5 ring-1 ring-amber-400/40 transition-shadow group-hover:shadow-amber-500/20">
+              <span className="flex h-full w-full items-center justify-center rounded-md bg-night-900">
+                <Image src="/hyglow-logo.png" alt="Hyglow" width={72} height={72} className="h-full w-full object-contain" />
+              </span>
             </span>
-            Hyglow
+            <span className="font-display">
+              Hy<span className="text-amber-300">glow</span>
+            </span>
           </Link>
-          <nav className="text-sm text-zinc-600 dark:text-zinc-400">
-            <Link href="/pricing" className="hover:text-zinc-900 dark:hover:text-white">
+          <nav className="text-sm text-slate-400">
+            <Link href="/pricing" className="transition-colors hover:text-amber-200">
               Pricing
             </Link>
           </nav>

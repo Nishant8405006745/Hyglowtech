@@ -4,25 +4,39 @@ import { MarketingFooter } from "@/components/MarketingFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 
 export const metadata: Metadata = {
-  title: "About | Hyglow",
-  description: "Hyglow is a production-oriented SaaS starter for teams who want control over auth and data.",
+  title: "About",
+  description:
+    "Hyglow Lighting — specialists in electrical bulbs and lamps. Our mission is simple: the right light, every fitting, honest advice.",
 };
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-950">
+    <div className="min-h-screen bg-mesh-lights">
       <SiteHeader />
-      <main className="mx-auto max-w-3xl px-4 py-16">
-        <h1 className="text-3xl font-bold text-zinc-900 dark:text-white">About Hyglow</h1>
-        <p className="mt-6 text-zinc-600 dark:text-zinc-400">
-          Hyglow demonstrates a clean split between a Next.js experience layer and a FastAPI domain API. Passwords never
-          leave the server except as secure hashes; JWTs are issued by the API and can be held in HTTP-only cookies through
-          the Next.js BFF pattern implemented here.
-        </p>
-        <p className="mt-4 text-zinc-600 dark:text-zinc-400">
-          The database schema includes a normalized <code className="rounded bg-zinc-100 px-1 dark:bg-zinc-800">roles</code>{" "}
-          table and links users and employees so managers only see their direct reports unless they are administrators.
-        </p>
+      <main className="mx-auto max-w-3xl px-4 py-16 sm:py-20">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-400/90">Our story</p>
+        <h1 className="font-display mt-3 text-4xl font-semibold tracking-tight text-white">About Hyglow</h1>
+        <div className="mt-10 space-y-6 text-slate-400 leading-relaxed">
+          <p>
+            Hyglow began with a straightforward obsession: <strong className="text-slate-200">electrical light sources done right</strong>
+            . Not generic “smart home” gadgets — bulbs, tubes, and lamps that electricians and homeowners actually specify:
+            correct bases, real lumen figures, and colour temperatures that match the space.
+          </p>
+          <p>
+            Today we stock <strong className="text-slate-200">all major bulb types</strong> — LED retrofit, halogen and
+            incandescent where still needed, compact fluorescent and linear tubes for legacy fittings, appliance and
+            specialty lamps, plus commercial and weatherproof lines for sites that cannot afford downtime.
+          </p>
+          <p>
+            Our online platform helps trade customers and teams manage accounts, while every product page is written to
+            answer the questions you would ask at the counter: wattage equivalents, dimming behaviour, and compatibility.
+          </p>
+          <p className="rounded-2xl border border-white/10 bg-night-900/60 p-6 text-slate-300">
+            <span className="font-display text-lg font-semibold text-amber-200">Promise:</span> if a lamp is listed, it meets
+            current electrical safety expectations and ships with clear installation guidance. When in doubt, our team
+            helps you match cap type, voltage, and enclosure rating before you order.
+          </p>
+        </div>
       </main>
       <MarketingFooter />
     </div>

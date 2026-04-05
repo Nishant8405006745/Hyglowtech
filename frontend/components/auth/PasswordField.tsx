@@ -28,7 +28,7 @@ export function PasswordField({
   return (
     <div className="space-y-1">
       <div className="flex items-center justify-between gap-2">
-        <label htmlFor={id} className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+        <label htmlFor={id} className="text-sm font-medium text-slate-300">
           {label}
         </label>
       </div>
@@ -41,12 +41,12 @@ export function PasswordField({
           autoComplete={autoComplete}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full rounded-xl border border-zinc-200 bg-white py-2.5 pl-3 pr-12 text-zinc-900 shadow-sm outline-none transition-all duration-200 placeholder:text-zinc-400 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white dark:focus:border-violet-400"
+          className="w-full rounded-xl border border-white/15 bg-night-950/60 py-2.5 pl-3 pr-12 text-slate-100 shadow-inner outline-none transition-all duration-200 placeholder:text-slate-500 focus:border-amber-400/70 focus:ring-2 focus:ring-amber-400/20"
         />
         <button
           type="button"
           onClick={() => setShow((s) => !s)}
-          className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg px-2 py-1 text-xs font-medium text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
+          className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg px-2 py-1 text-xs font-medium text-slate-400 transition-colors hover:bg-white/10 hover:text-amber-200"
           aria-pressed={show}
         >
           {show ? "Hide" : "Show"}
