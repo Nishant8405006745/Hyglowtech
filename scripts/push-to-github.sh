@@ -63,7 +63,15 @@ TOKEN="$(get_token)"
 PUSH_URL="https://x-access-token:${TOKEN}@github.com/${REMOTE_PATH}"
 
 echo "Pushing main → ${AUTH_URL} …"
-git push "$PUSH_URL" HEAD:main
+if ! git push "$PUSH_URL" HEAD:main; then
+  echo "" >&2
+  echo "Push failed. If you saw HTTP 403, the token can log in but cannot write to this repo:" >&2
+  echo "  • Classic PAT: enable scope 'repo' (full control of private repositories)." >&2
+  echo "  • Fine-grained PAT: Repository access → Hyglowtech, Permissions → Contents: Read and write." >&2
+  echo "  • Organization repo: authorize the token for SSO (GitHub → token settings)." >&2
+  echo "Create or fix a token: https://github.com/settings/tokens" >&2
+  exit 1
+fi
 
 if git remote get-url origin >/dev/null 2>&1; then
   git branch --set-upstream-to=origin/main main 2>/dev/null || true
