@@ -113,7 +113,33 @@ Marketing routes use the App Router `metadata` API plus **next-seo** JSON-LD (`O
 
 ## Deployment
 
-### Frontend (Vercel)
+### All-in-one on Render (Blueprint)
+
+The repo includes [`render.yaml`](render.yaml): **Render Postgres** + **FastAPI** (`hyglowtech-api`) + **Next.js** (`hyglowtech-web`). Defaults match these URLs (change them together if you rename services):
+
+| Service | URL |
+|---------|-----|
+| Frontend | `https://hyglowtech-web.onrender.com` |
+| API | `https://hyglowtech-api.onrender.com` |
+
+1. Push this repo to GitHub.
+2. In [Render Dashboard](https://dashboard.render.com) → **New** → **Blueprint** → connect the repo and apply `render.yaml`.
+3. Wait for all three resources to go **Live** (first deploy can take several minutes).
+4. **Create an admin (once):** open **Shell** on `hyglowtech-api`, then run (env vars are required):
+   ```bash
+   export SUPER_ADMIN_EMAIL="you@yourdomain.com"
+   export SUPER_ADMIN_PASSWORD="your-secure-password"
+   python -m scripts.bootstrap_super_admin
+   ```
+5. Open the **frontend URL**, sign in, and use the dashboard.
+
+**If the API returns CORS errors:** your `CORS_ORIGINS` and `FRONTEND_BASE_URL` on `hyglowtech-api` must exactly match the browser origin (including `https://`). After renaming a service, update those env vars and **Redeploy** the API.
+
+**External database (Neon instead of Render Postgres):** remove the `databases:` block from `render.yaml`, delete the `DATABASE_URL` `fromDatabase` entry on the API service, and set `DATABASE_URL` in the Render dashboard to Neon’s connection string (`postgresql://…`). Redeploy.
+
+**Free tier:** web services **spin down** when idle (cold starts). Postgres free tier may have [limits](https://render.com/docs/free); upgrade for production traffic.
+
+### Frontend (Vercel) + API elsewhere
 
 1. Import the `frontend/` directory as a Vercel project (or monorepo root with **Root Directory** = `frontend`).
 2. Environment variables:
@@ -121,17 +147,18 @@ Marketing routes use the App Router `metadata` API plus **next-seo** JSON-LD (`O
    - `NEXT_PUBLIC_SITE_URL` — canonical site URL for JSON-LD and links.
 3. Ensure the API’s `CORS_ORIGINS` includes your Vercel domain.
 
-### Backend (Render / Railway / Fly / Docker)
+### Backend (Railway / Fly / Docker)
 
 - **Docker:** `docker build -t hyglow-api ./backend` then run with `DATABASE_URL`, `JWT_SECRET`, `CORS_ORIGINS`, `PORT`.
-- **Render/Railway:** start command similar to `alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port $PORT`.
-- Use Neon’s **pooled** connection string for serverless workers.
+- **Railway/Fly:** use `preDeployCommand` or startup hook for `alembic upgrade head`, then `uvicorn app.main:app --host 0.0.0.0 --port $PORT`.
+- Use Neon’s **pooled** connection string for highly elastic workers.
 
 ## Environment variables (cheat sheet)
 
 | Variable | Where | Purpose |
 |----------|--------|---------|
-| `DATABASE_URL` | Backend | PostgreSQL URL (SQLAlchemy will accept `postgresql://` or `postgresql+psycopg://`) |
+| `DATABASE_URL` | Backend | PostgreSQL URL (`postgresql://`, `postgres://`, or `postgresql+psycopg://` — normalized automatically) |
+| `DB_POOL_SIZE` / `DB_MAX_OVERFLOW` | Backend | Optional SQLAlchemy pool (lower on small Postgres plans) |
 | `JWT_SECRET` | Backend | Symmetric key for JWT signing |
 | `CORS_ORIGINS` | Backend | Comma-separated browser origins |
 | `BACKEND_URL` | Frontend (server) | Upstream FastAPI URL for Route Handlers |
@@ -174,5 +201,3 @@ Or use the default host: `git remote set-url origin git@github.com:Nishant840500
 ## License
 
 Use and modify for your product; no warranty implied.
-# Hyglowtech
-# Hyglowtech
