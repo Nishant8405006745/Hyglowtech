@@ -139,20 +139,36 @@ Marketing routes use the App Router `metadata` API plus **next-seo** JSON-LD (`O
 
 ## Push to GitHub
 
-This project uses its **own** Git repo in `HYGLOWTECH/` (not your home folder). Initial commit is already created on `main`.
+This project’s Git root is **`HYGLOWTECH/`** (not your home folder). Branch **`main`** already has your commits.
 
-1. On GitHub: **New repository** → name it (e.g. `hyglow`) → leave “Add README” **unchecked** → Create.
-2. In a terminal:
+**Your repo:** [https://github.com/Nishant8405006745/Hyglowtech](https://github.com/Nishant8405006745/Hyglowtech)
+
+The remote is usually already set. From **Terminal** (on your Mac, not a headless tool):
 
 ```bash
 cd ~/Desktop/HYGLOWTECH
-git remote add origin https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME.git
+git remote -v
+# Should show: origin https://github.com/Nishant8405006745/Hyglowtech.git
 git push -u origin main
 ```
 
-Use SSH if you prefer: `git@github.com:YOUR_GITHUB_USERNAME/YOUR_REPO_NAME.git`
+If `git push` asks for a password, GitHub **does not use your account password**. Use a **Personal Access Token**:
 
-**Do not commit secrets:** `backend/.env`, `frontend/.env.local`, and `.pgdata/` are listed in `.gitignore`. Set real values in GitHub/Vercel/Railway **Environment variables** after deploy.
+1. Open [GitHub → Settings → Developer settings → Personal access tokens](https://github.com/settings/tokens).
+2. **Generate new token (classic)** → enable scope **`repo`** → copy the token once.
+3. When Git asks for **Password**, paste the **token**. Username is `Nishant8405006745`.
+
+**Easier option — GitHub Desktop:** [Download GitHub Desktop](https://desktop.github.com/) → **File → Add Local Repository** → choose `Desktop/HYGLOWTECH` → **Publish repository** and pick `Nishant8405006745/Hyglowtech`.
+
+**SSH (if you use SSH keys with GitHub):**
+
+```bash
+cd ~/Desktop/HYGLOWTECH
+git remote set-url origin git@github.com:Nishant8405006745/Hyglowtech.git
+git push -u origin main
+```
+
+**Do not commit secrets:** `backend/.env`, `frontend/.env.local`, and `.pgdata/` stay gitignored. Configure production env vars on GitHub/Vercel/hosting only.
 
 ## License
 
