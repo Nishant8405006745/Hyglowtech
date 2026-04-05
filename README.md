@@ -137,6 +137,23 @@ Marketing routes use the App Router `metadata` API plus **next-seo** JSON-LD (`O
 | `BACKEND_URL` | Frontend (server) | Upstream FastAPI URL for Route Handlers |
 | `NEXT_PUBLIC_SITE_URL` | Frontend | Canonical URL for structured data |
 
+## Push to GitHub
+
+This project uses its **own** Git repo in `HYGLOWTECH/` (not your home folder). Initial commit is already created on `main`.
+
+1. On GitHub: **New repository** → name it (e.g. `hyglow`) → leave “Add README” **unchecked** → Create.
+2. In a terminal:
+
+```bash
+cd ~/Desktop/HYGLOWTECH
+git remote add origin https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME.git
+git push -u origin main
+```
+
+Use SSH if you prefer: `git@github.com:YOUR_GITHUB_USERNAME/YOUR_REPO_NAME.git`
+
+**Do not commit secrets:** `backend/.env`, `frontend/.env.local`, and `.pgdata/` are listed in `.gitignore`. Set real values in GitHub/Vercel/Railway **Environment variables** after deploy.
+
 ## License
 
 Use and modify for your product; no warranty implied.
