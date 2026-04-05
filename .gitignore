@@ -1,0 +1,36 @@
+# Environment — never commit secrets
+.env
+.env.local
+.env.*.local
+backend/.env
+frontend/.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+venv/
+backend/.venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Node / Next.js
+node_modules/
+frontend/.next/
+frontend/out/
+*.tsbuildinfo
+next-env.d.ts
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
+
+# Alembic (keep versions; ignore local DB if any)
+*.db
+
+# Local-only Postgres data (brew initdb cluster for Hyglow dev)
+.pgdata/

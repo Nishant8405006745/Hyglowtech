@@ -1,0 +1,1 @@
+"""Hyglow FastAPI application package."""
